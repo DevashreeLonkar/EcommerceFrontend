@@ -15,6 +15,12 @@ import { RouterModule } from '@angular/router';
 import { AuthInterceptor } from './_auth/auth.interceptor';
 import { UserService } from './_services/user.service';
 import { AuthGuard } from './_auth/auth.guard';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +37,11 @@ import { AuthGuard } from './_auth/auth.guard';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     // AuthGuard,
@@ -41,7 +51,8 @@ import { AuthGuard } from './_auth/auth.guard';
       multi:true
     },
     UserService,
-    AuthGuard   
+    AuthGuard,
+    provideAnimationsAsync()   
   ],
   bootstrap: [AppComponent]
 })
