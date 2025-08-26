@@ -26,3 +26,11 @@ mat-grid-tile{
     margin-left: auto;
     margin-right: auto;
 }
+
+.centered{
+    text-align: center;
+}
+
+.browse-button{
+    color: blue;
+}
