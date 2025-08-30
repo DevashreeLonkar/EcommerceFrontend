@@ -12,7 +12,7 @@ export class ShowProductDetailsComponent implements OnInit{
 
   productDetails: Product[]= [];
 
-  displayedColumns: string[] = ['Id', 'Product Name', 'Product Description', 'Product Discounted Price', 'Product Actual Price'];
+  displayedColumns: string[] = ['Id', 'Product Name', 'Product Description', 'Product Discounted Price', 'Product Actual Price','Edit','Delete'];
 
 constructor(private productService: ProductService){}
 
@@ -25,6 +25,17 @@ constructor(private productService: ProductService){}
       (resp: Product[]) =>{
         console.log(resp);
         this.productDetails= resp;
+      },
+      (error: HttpErrorResponse) =>{
+        console.log(error);
+      }
+    );
+  }
+
+  deleteProduct(productId:any){
+    this.productService.deleteProduct(productId).subscribe(
+      (resp) =>{
+        this.getAllProducts();
       },
       (error: HttpErrorResponse) =>{
         console.log(error);
