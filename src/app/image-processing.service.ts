@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Product } from './_model/product.model';
 import { FileHandle } from './_model/file-handle.model';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageProcessingService {
 
-  constructor() { }
+  constructor(private sanitizer: DomSanitizer) { }
 
   public createImages(product: Product){
-    const productImages: any[]= product.productImages;
+    const productImages: any[]= product.productImages || [];
 
     const productImagesToFileHandle: FileHandle[]= [];
 
@@ -18,7 +19,19 @@ export class ImageProcessingService {
       const imageFileData= productImages[i];
 
       const imageBlob= this.dataURItoBlob(imageFileData.picByte, imageFileData.type);
+
+      const imageFile= new File([imageBlob], imageFileData.name, { type: imageFileData.type});
+
+      const finalFileHandle: FileHandle= {
+        file: imageFile,
+        url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(imageFile))
+      };
+
+      productImagesToFileHandle.push(finalFileHandle);
     }
+
+    product.productImages= productImagesToFileHandle;
+    return product;
   }
 
   public dataURItoBlob(picBytes: string, imageType: any){
