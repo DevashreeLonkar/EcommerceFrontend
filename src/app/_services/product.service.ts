@@ -22,6 +22,6 @@ export class ProductService {
   }
 
   public getProductDetailsById(productId: string){
-    return this.httpClient.get<Product>("http://localhost:8080/getProductDetails"+productId);
+    return this.httpClient.get<Product>("http://localhost:8080/getProductDetails/"+productId);
   }
 }
