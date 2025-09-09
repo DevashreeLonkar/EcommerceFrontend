@@ -13,13 +13,15 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './add-new-product.component.css'
 })
 export class AddNewProductComponent implements OnInit {
+  isNewProduct= true;
 
   product: Product = {
     productName: "",
     productDescription: "",
     productDiscountedPrice: 0,
     productActualPrice: 0,
-    productImages: []
+    productImages: [],
+    productId: 0,
   }
 
   constructor(private productService: ProductService,
@@ -28,7 +30,11 @@ export class AddNewProductComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-    this.activatedRoute.snapshot.data['product'];
+   this.product= this.activatedRoute.snapshot.data['product'];
+
+   if(this.product && this.product.productId){
+    this.isNewProduct= false;
+   }
   }
 
   addProduct(productForm: NgForm){
