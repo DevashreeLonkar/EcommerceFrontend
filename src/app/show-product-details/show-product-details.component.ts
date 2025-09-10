@@ -57,7 +57,7 @@ constructor(private productService: ProductService,
   }
 
   showImages(product: Product){
-    console.log(product);
+    console.log("----->",product,product.productImages);
     this.imagesDialog.open(ShowProductImagesDialogComponent, {
       data:{
         images: product.productImages

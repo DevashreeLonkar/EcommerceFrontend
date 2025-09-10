@@ -91,5 +91,6 @@ export class AddNewProductComponent implements OnInit {
 
   fileDropped(fileHandle: FileHandle){
     this.product.productImages.push(fileHandle);
+    console.log("-----------",fileHandle);
   }
 }
