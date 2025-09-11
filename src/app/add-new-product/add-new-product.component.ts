@@ -22,6 +22,7 @@ export class AddNewProductComponent implements OnInit {
     productActualPrice: 0,
     productImages: [],
     productId: 0,
+    productImageSet: []
   }
 
   constructor(private productService: ProductService,
