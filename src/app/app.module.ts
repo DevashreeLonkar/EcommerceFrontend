@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,20 +16,21 @@ import { RouterModule } from '@angular/router';
 import { AuthInterceptor } from './_auth/auth.interceptor';
 import { UserService } from './_services/user.service';
 import { AuthGuard } from './_auth/auth.guard';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { AddNewProductComponent } from './add-new-product/add-new-product.component';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { DragDirective } from './drag.directive';
 import { ShowProductDetailsComponent } from './show-product-details/show-product-details.component';
-import {MatTableModule} from '@angular/material/table';
-import {MatIconModule} from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 import { ShowProductImagesDialogComponent } from './show-product-images-dialog/show-product-images-dialog.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ProductViewDetailsComponent } from './product-view-details/product-view-details.component';
+import { BuyProductComponent } from './buy-product/buy-product.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { ProductViewDetailsComponent } from './product-view-details/product-view
     DragDirective,
     ShowProductDetailsComponent,
     ShowProductImagesDialogComponent,
-    ProductViewDetailsComponent
+    ProductViewDetailsComponent,
+    BuyProductComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +54,7 @@ import { ProductViewDetailsComponent } from './product-view-details/product-view
     FormsModule,
     HttpClientModule,
     RouterModule,
+    BrowserAnimationsModule, 
     MatToolbarModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -61,16 +65,14 @@ import { ProductViewDetailsComponent } from './product-view-details/product-view
     MatDialogModule
   ],
   providers: [
-    // AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi:true
+      multi: true
     },
     UserService,
-    AuthGuard,
-    provideAnimationsAsync()   
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

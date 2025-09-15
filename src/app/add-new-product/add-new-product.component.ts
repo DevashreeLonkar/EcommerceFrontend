@@ -6,11 +6,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FileHandle } from '../_model/file-handle.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { MatFormField } from "@angular/material/form-field";
 
 @Component({
   selector: 'app-add-new-product',
   templateUrl: './add-new-product.component.html',
-  styleUrl: './add-new-product.component.css'
+  styleUrl: './add-new-product.component.css',
 })
 export class AddNewProductComponent implements OnInit {
   isNewProduct= true;
