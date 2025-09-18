@@ -41,7 +41,46 @@
                  </form>
             </div>
             <div class="col-6">
-                
+                <table class="table">
+                    <thead class="thead">
+                        <tr>
+                            <th>Name</th>
+                            <th>Amount</th>
+                            <th style="width: 120px;">Quantity</th>
+                            <th style="width: 150px;">Total</th>
+
+                        </tr>
+                    </thead>
+                    <body class="tobody"></body>
+                    <tr *ngFor="let product of productDetails">
+                        <td>{{product.productName}}</td>
+                        <td>{{product.productDiscountedPrice}}</td>
+                        <td class="pe-4">
+                            <select 
+                            #quantity
+                            class="form-select"
+                            [ngModel]="getQuantityForProduct(product.productId)"
+                            (change)="onQuatityChanged($any(quantity.value), product.productId)"
+                            >
+                        <option [value]="1">1</option>
+                        <option [value]="2">2</option>
+                        <option [value]="3">3</option>
+                        <option [value]="4">4</option>
+                        <option [value]="5">5</option>
+                        </select>
+                        </td>
+                        <td>
+                            {{getCalculatedTotal(product.productId, product.productDiscountedPrice)}}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Total</td>
+                        <td>{{getCalculatedGrandTotal()}}</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

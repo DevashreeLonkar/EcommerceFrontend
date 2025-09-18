@@ -50,4 +50,43 @@ export class BuyProductComponent implements OnInit{
     )
   }
 
+  getQuantityForProduct(productId: number){
+    const filteredProduct= this.orderDetails.orderProductQuantities.filter(
+      (productuantity)=> productuantity.productId === productId
+    );
+
+    return filteredProduct[0].quantity;
+  }
+
+  getCalculatedTotal(productId: number, productDiscountedPrice: number){
+    const filteredProduct= this.orderDetails.orderProductQuantities.filter(
+      (productuantity)=> productuantity.productId === productId
+    );
+
+    return filteredProduct[0].quantity * productDiscountedPrice;
+  }
+
+  onQuatityChanged(q: number, productId: number){
+    this.orderDetails.orderProductQuantities.filter(
+      (orderProduct) => orderProduct.productId === productId
+    )[0].quantity= q;
+  }
+
+getCalculatedGrandTotal() {
+  let grandTotal = 0;
+
+  this.orderDetails.orderProductQuantities.forEach(productQuantity => {
+    const product = this.productDetails.find(
+      p => p.productId === productQuantity.productId
+    );
+
+    if (product) {
+      grandTotal += product.productDiscountedPrice * productQuantity.quantity;
+    }
+  });
+
+  return grandTotal;
+}
+
+
 }
