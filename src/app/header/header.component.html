@@ -17,3 +17,15 @@
 <button *ngIf="isAdmin()" mat-raised-button color="primary" routerLink="/showProductDetails">Show All Products</button>
 </mat-toolbar>
 
+<!-- <mat-toolbar color="primary" *ngIf="isLoggedIn()">
+  <button mat-raised-button color="primary" routerLink="/">Home</button>
+
+  <ng-container *ngIf="isAdmin()">
+    <button mat-raised-button color="primary" routerLink="/addNewProduct">Add New Product</button>
+    <button mat-raised-button color="primary" routerLink="/showProductDetails">Show All Products</button>
+  </ng-container>
+
+  <ng-container *ngIf="isUser()">
+    <button mat-raised-button color="accent" routerLink="/myOrders">My Orders</button>
+  </ng-container>
+</mat-toolbar> -->
