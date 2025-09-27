@@ -23,6 +23,8 @@ export class ShowProductDetailsComponent implements OnInit{
 
   productDetails: Product[]= [];
 
+  currentSearchKey: string = "";
+
   displayedColumns: string[] = ['Id', 'Product Name', 'Product Description', 'Product Discounted Price', 'Product Actual Price','Images','Edit','Delete'];
 
 constructor(private productService: ProductService,
@@ -32,12 +34,19 @@ constructor(private productService: ProductService,
 ){}
 
   ngOnInit(): void {
-   this.getAllProducts();
+   this.getAllProducts(0, "");
   }
 
-  public getAllProducts(){
+  searchByKeyword(searchkeyword: any){
+    this.pageNumber=0;
+    this.productDetails=[];
+    this.getAllProducts(0, searchkeyword);
+    this.currentSearchKey = searchkeyword;
+  }
+
+  public getAllProducts(pageNumber: number, searchkey: string=""){
     this.showTable= false;
-    this.productService.getAllProducts(this.pageNumber)
+    this.productService.getAllProducts(pageNumber, searchkey)
     .pipe(
       map((x: Product[], i) => x.map((product: Product) => this.imageProcessingService.createImages(product)))
     )
@@ -63,7 +72,9 @@ constructor(private productService: ProductService,
   deleteProduct(productId:any){
     this.productService.deleteProduct(productId).subscribe(
       (resp) =>{
-        this.getAllProducts();
+      this.pageNumber = 0;
+      this.productDetails = [];
+        this.getAllProducts(this.pageNumber, this.currentSearchKey);
       },
       (error: HttpErrorResponse) =>{
         console.log(error);
@@ -88,7 +99,8 @@ constructor(private productService: ProductService,
 
   public loadMoreProducts(){
     this.pageNumber= this.pageNumber +1;
-    this.getAllProducts();
+    this.getAllProducts(this.pageNumber, this.currentSearchKey);
+    //this.getAllProducts();
   }
 
 }

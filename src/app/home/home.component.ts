@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit{
 
   showLoadButton= false;
 
+  currentSearchKey: string = "";
 
 constructor(private productService: ProductService,
   private imageProcessingService: ImageProcessingService,
@@ -25,11 +26,18 @@ constructor(private productService: ProductService,
 ){}
 
   ngOnInit(): void {
-    this.getAllProducts();
+    this.getAllProducts(0, "");
     }
 
-  public getAllProducts(){
-    this.productService.getAllProducts(this.pageNumber)
+  searchByKeyword(searchkeyword: any){
+    this.pageNumber=0;
+    this.productDetails=[];
+    this.getAllProducts(0, searchkeyword);
+    this.currentSearchKey = searchkeyword;
+  }
+
+  public getAllProducts(pageNumber: number, searchkey: string=""){
+    this.productService.getAllProducts(pageNumber, searchkey)
     .pipe(
       map((x: Product[], i) => x.map((product: Product) => this.imageProcessingService.createImages(product)))
     )
@@ -57,7 +65,11 @@ constructor(private productService: ProductService,
 
   public loadMoreProducts(){
     this.pageNumber= this.pageNumber +1;
-    this.getAllProducts();
+     this.getAllProducts(this.pageNumber, this.currentSearchKey);
+    //this.getAllProducts();
   }
+
+ 
+
   
 }
