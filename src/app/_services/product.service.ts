@@ -33,4 +33,8 @@ export class ProductService {
   public placeOrder(orderDetails: OrderDetails){
     return this.httpClient.post("http://localhost:8080/placeOrder", orderDetails);
   }
+
+  public addToCart(productId: any){
+    return this.httpClient.get("http://localhost:8080/addToCart/"+productId);
+  }
 }
