@@ -1,6 +1,9 @@
 <div class=" container mt-5">
   <div align="right" class="mb-5">
-    <button (click)="checkout()" mat-raised-button color="primary">Checkout</button>
+    <button (click)="checkout()" mat-raised-button color="primary" 
+    [disabled]="cartDetails.length === 0"
+    matTooltip="Add items to cart before checkout"
+    >Checkout</button>
   </div>
 <table mat-table [dataSource]="cartDetails" class="mat-elevation-z8">
 
