@@ -52,7 +52,11 @@ export class ProductService {
     return this.httpClient.get<MyOrderDetails[]>("http://localhost:8080/getOrderDetails");
   }
 
-  public getAllOrderDetailsForAdmin(): Observable<MyOrderDetails[]> {
-    return this.httpClient.get<MyOrderDetails[]>("http://localhost:8080/getAllOrderDetails");
+  public getAllOrderDetailsForAdmin(orderStatus: String): Observable<MyOrderDetails[]> {
+    return this.httpClient.get<MyOrderDetails[]>("http://localhost:8080/getAllOrderDetails/"+orderStatus);
+  }
+
+  public markAsDelivered(orderId: any){
+    return this.httpClient.get("http://localhost:8080/markOrderAsDelivered/"+orderId);
   }
 }
